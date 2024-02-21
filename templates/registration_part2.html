@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация (2FA)</title>
+</head>
+<body>
+    <h1>Регистрация (2FA)</h1>
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <p>Отсканируйте QR в приложении для двухфакторной аутентификации:</p>
+    <img src="{{ url_for('static', filename='totp.png') }}" alt="QR-код для сканирования"><br><br>
+    <form action="/register/part2" method="post">
+        <label for="totp">Код 2FA:</label><br>
+        <input type="text" id="totp" name="totp" required><br><br>
+        <input type="hidden" name="username" value="{{ username }}">
+        <input type="hidden" name="password" value="{{ password }}">
+        <input type="submit" value="Зарегистрироваться">
+    </form>
+</body>
+</html>
